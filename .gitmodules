@@ -1,0 +1,3 @@
+[submodule "tuterm"]
+	path = tuterm
+	url = https://aur.archlinux.org/tuterm.git
