@@ -1,0 +1,34 @@
+# Maintainer: Haris Gusic <harisgusic.dev@gmail.com>
+pkgname=dmenu-height
+_pkgname=dmenu
+pkgver=5.2
+pkgrel=1
+pkgdesc="My custom dmenu build with height option"
+arch=(x86_64)
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=(dmenu)
+conflicts=()
+replaces=()
+backup=()
+options=()
+source=("git+https://git.suckless.org/$_pkgname#tag=$pkgver"
+        "https://tools.suckless.org/$_pkgname/patches/line-height/$_pkgname-lineheight-$pkgver.diff")
+sha256sums=(
+SKIP
+c563509830902b996c734ef1fd4d969c15adbc3d3b8b2626e07d58c7bc584b49
+)
+
+prepare() {
+	cd "$srcdir/$_pkgname"
+	git apply "$srcdir/$_pkgname-lineheight-$pkgver.diff"
+}
+
+package() {
+	cd "$srcdir/$_pkgname"
+	make clean install DESTDIR="$pkgdir" PREFIX=/usr/local
+}
